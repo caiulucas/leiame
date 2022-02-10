@@ -1,14 +1,19 @@
+import { useAuth } from '@hooks/auth';
 import React from 'react';
 import { RectButtonProps } from 'react-native-gesture-handler';
 import { Container, Icon, Title } from './styles';
 
-type ButtonProps = RectButtonProps & {
+type SignInButtonProps = RectButtonProps & {
   title: string;
 };
 
-export const LoginButton: React.FC<ButtonProps> = ({ title, ...rest }) => {
+export const SignInButton: React.FC<SignInButtonProps> = ({
+  title,
+  ...rest
+}) => {
+  const { signIn } = useAuth();
   return (
-    <Container {...rest}>
+    <Container {...rest} onPress={signIn}>
       <Icon name="google" size={24} color="black" />
       <Title>{title}</Title>
     </Container>

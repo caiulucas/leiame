@@ -1,7 +1,6 @@
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import { Login } from '@screens/Login';
 import { ThemeProvider } from 'styled-components/native';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
@@ -9,6 +8,8 @@ import {
   Montserrat_400Regular,
   Montserrat_500Medium,
 } from '@expo-google-fonts/montserrat';
+import { HooksProvider } from '@hooks/index';
+import { Routes } from '@routes/index';
 import themes from './src/themes';
 
 export default function App() {
@@ -24,9 +25,11 @@ export default function App() {
 
   return (
     <ThemeProvider theme={themes}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <Login />
-      </GestureHandlerRootView>
+      <HooksProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Routes />
+        </GestureHandlerRootView>
+      </HooksProvider>
     </ThemeProvider>
   );
 }

@@ -1,11 +1,13 @@
 {
   "expo": {
-    "name": "leiame",
+    "owner": "lienscarlet",
+    "name": "Leia-me",
     "slug": "leiame",
+    "scheme": "leiame",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ]
   },
-  "name": "leiame"
+  "name": "Leia-me"
 }
