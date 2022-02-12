@@ -16,5 +16,6 @@ export default {
     TITLE: 'Poppins_600SemiBold',
     TEXT: 'Montserrat_400Regular',
     BUTTON: 'Montserrat_500Medium',
+    LABEL: 'Montserrat_600SemiBold',
   },
 };

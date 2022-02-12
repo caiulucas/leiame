@@ -7,6 +7,7 @@ import { useFonts, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 import {
   Montserrat_400Regular,
   Montserrat_500Medium,
+  Montserrat_600SemiBold,
 } from '@expo-google-fonts/montserrat';
 import { HooksProvider } from '@hooks/index';
 import { Routes } from '@routes/index';
@@ -18,6 +19,7 @@ export default function App() {
     Poppins_600SemiBold,
     Montserrat_400Regular,
     Montserrat_500Medium,
+    Montserrat_600SemiBold,
   });
 
   if (!fontsLoaded) {
@@ -27,8 +29,12 @@ export default function App() {
   return (
     <ThemeProvider theme={themes}>
       <HooksProvider>
-        <StatusBar translucent backgroundColor="transparent" />
         <GestureHandlerRootView style={{ flex: 1 }}>
+          <StatusBar
+            translucent
+            backgroundColor="transparent"
+            barStyle="dark-content"
+          />
           <Routes />
         </GestureHandlerRootView>
       </HooksProvider>

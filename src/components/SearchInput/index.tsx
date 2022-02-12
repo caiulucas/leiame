@@ -5,7 +5,7 @@ import { Container, Icon, Input, SearchButton } from './styles';
 type SearchInputProps = {
   value: string;
   onChangeText: (text: string) => void;
-  onPress: (pointerInside: boolean) => void;
+  onPress: () => void;
 };
 
 export const SearchInput: React.FC<SearchInputProps> = ({
@@ -19,6 +19,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         placeholder="Procure um livro"
         value={value}
         onChangeText={onChangeText}
+        onEndEditing={() => onPress()}
       />
       <SearchButton onPress={onPress}>
         <Icon />

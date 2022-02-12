@@ -34,19 +34,19 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User>({} as User);
 
   useEffect(() => {
-    GoogleSignin.configure({
-      scopes: ['https://www.googleapis.com/auth/books'],
-      webClientId:
-        '239213670592-b9rto0m2guemr1ostlpchsnkhehl9cso.apps.googleusercontent.com',
-      // offlineAccess: true,
-    });
-
     async function loadUser() {
       const loadedUser = await AsyncStorage.getItem(storageKey);
       if (loadedUser) setUser(JSON.parse(loadedUser));
     }
 
     loadUser();
+
+    GoogleSignin.configure({
+      scopes: ['https://www.googleapis.com/auth/books'],
+      webClientId:
+        '239213670592-b9rto0m2guemr1ostlpchsnkhehl9cso.apps.googleusercontent.com',
+      // offlineAccess: true,
+    });
   }, []);
 
   const signIn = useCallback(async () => {
@@ -62,11 +62,11 @@ export const AuthProvider: React.FC = ({ children }) => {
           avatar: response.user.photoURL,
         };
 
-        setUser(authenticatedUser);
         await AsyncStorage.setItem(
           storageKey,
           JSON.stringify(authenticatedUser),
         );
+        setUser(authenticatedUser);
       }
     } catch (error) {
       console.log(error);

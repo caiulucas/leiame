@@ -9,7 +9,7 @@ export const Home: React.FC = () => {
     async function clearAsyncStorage() {
       await AsyncStorage.clear();
     }
-    clearAsyncStorage();
+    // clearAsyncStorage();
   }, []);
 
   return (
