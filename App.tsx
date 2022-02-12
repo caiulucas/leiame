@@ -10,6 +10,7 @@ import {
 } from '@expo-google-fonts/montserrat';
 import { HooksProvider } from '@hooks/index';
 import { Routes } from '@routes/index';
+import { StatusBar } from 'react-native';
 import themes from './src/themes';
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
   return (
     <ThemeProvider theme={themes}>
       <HooksProvider>
+        <StatusBar translucent backgroundColor="transparent" />
         <GestureHandlerRootView style={{ flex: 1 }}>
           <Routes />
         </GestureHandlerRootView>
