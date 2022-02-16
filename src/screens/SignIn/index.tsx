@@ -2,7 +2,7 @@ import React from 'react';
 
 import ShapePng from '@assets/shape.png';
 import LogoSvg from '@assets/logo.svg';
-import { SignInButton } from '@components/SignInButton';
+import { SignInButton } from '@components/Buttons/SignInButton';
 import { StatusBar } from 'react-native';
 import { Container, Title } from './styles';
 

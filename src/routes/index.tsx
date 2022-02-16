@@ -2,13 +2,13 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { SignIn } from '@screens/SignIn';
 import { useAuth } from '@hooks/auth';
-import { TabRoutes } from './tab.routes';
+import { StackRoutes } from './stack.routes';
 
 export const Routes: React.FC = () => {
   const { user } = useAuth();
   return (
     <NavigationContainer>
-      {user.email ? <TabRoutes /> : <SignIn />}
+      {user.email ? <StackRoutes /> : <SignIn />}
     </NavigationContainer>
   );
 };

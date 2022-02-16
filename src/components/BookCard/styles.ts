@@ -10,27 +10,6 @@ export const Container = styled.TouchableOpacity`
   border-bottom-color: ${({ theme }) => theme.COLORS.SHAPE};
 `;
 
-export const BookTemplate = styled.View`
-  width: ${RFValue(96)}px;
-  height: ${RFValue(144)}px;
-  border-radius: 8px;
-  border: 0.3px solid ${({ theme }) => theme.COLORS.PRIMARY_100};
-  justify-content: center;
-`;
-
-export const BookTemplateText = styled.Text`
-  font-size: ${RFValue(14)}px;
-  text-align: center;
-  font-family: ${({ theme }) => theme.FONTS.TEXT};
-  color: ${({ theme }) => theme.COLORS.PRIMARY_100};
-`;
-
-export const BookImage = styled.Image`
-  width: ${RFValue(96)}px;
-  height: ${RFValue(144)}px;
-  border-radius: 8px;
-`;
-
 export const BookInfo = styled.View`
   flex: 1;
   margin-top: ${RFValue(16)}px;

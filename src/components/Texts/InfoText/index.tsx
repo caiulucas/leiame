@@ -4,25 +4,25 @@ import { Container, Label, Text } from './styles';
 
 type InfoTextProps = {
   label: string;
-  color?: 'primary' | 'secondary';
+  type?: 'primary' | 'secondary';
   last?: boolean;
 };
 
 export const InfoText: React.FC<InfoTextProps> = ({
   label,
-  color,
+  type,
   last,
   children,
 }) => {
   return (
-    <Container style={last && { marginBottom: 0 }}>
-      <Label color={color}>{label}</Label>
+    <Container type={type} style={last && { marginBottom: 0 }}>
+      <Label type={type}>{label}</Label>
       <Text>{children}</Text>
     </Container>
   );
 };
 
 InfoText.defaultProps = {
-  color: 'primary',
+  type: 'primary',
   last: false,
 };

@@ -1,16 +1,27 @@
 import React, { useCallback, useState } from 'react';
 import { BookCard, Book as BookResponse } from '@components/BookCard';
-import { Header } from '@components/Header';
 import { SearchInput } from '@components/SearchInput';
 
 import axios from 'axios';
 
 import { FlatList } from 'react-native';
-import { Container, Content } from './styles';
+import { useNavigation } from '@react-navigation/native';
+import { BookNavigationProps } from '@routes/types';
+import { IconButton } from '@components/Buttons/IconButton';
+import { Container, Content, Header } from './styles';
 
 export const Search: React.FC = () => {
+  const { navigate } = useNavigation<BookNavigationProps>();
+
   const [searchText, setSearchText] = useState('');
   const [books, setBooks] = useState<BookResponse[]>([]);
+
+  const handleNavigate = useCallback(
+    (selfLink: string) => {
+      navigate('book', { selfLink });
+    },
+    [navigate],
+  );
 
   const handleSearch = useCallback(async () => {
     const response = await axios.get(
@@ -22,20 +33,28 @@ export const Search: React.FC = () => {
 
   return (
     <Container>
-      <Header />
-
-      <Content>
+      <Header>
         <SearchInput
           value={searchText}
           onChangeText={setSearchText}
           onPress={handleSearch}
         />
+
+        <IconButton icon="camera" />
+      </Header>
+
+      <Content>
         <FlatList
           data={books}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingTop: 24 }}
-          renderItem={({ item }) => <BookCard book={item} />}
+          renderItem={({ item }) => (
+            <BookCard
+              book={item}
+              onPress={() => handleNavigate(item.selfLink)}
+            />
+          )}
         />
       </Content>
     </Container>

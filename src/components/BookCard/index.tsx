@@ -3,15 +3,8 @@ import { Title } from '@components/Texts/Title';
 
 import { InfoText } from '@components/Texts/InfoText';
 import { TouchableOpacityProps } from 'react-native';
-import {
-  BookImage,
-  BookInfo,
-  BookTemplate,
-  BookTemplateText,
-  Button,
-  Container,
-  Icon,
-} from './styles';
+import { BookImage } from '@components/BookImage';
+import { BookInfo, Button, Container, Icon } from './styles';
 
 export type Book = {
   id: string;
@@ -34,23 +27,15 @@ type BookCardProps = TouchableOpacityProps & {
 export const BookCard: React.FC<BookCardProps> = ({ book, ...rest }) => {
   return (
     <Container {...rest}>
-      {book.volumeInfo.imageLinks?.thumbnail ? (
-        <BookImage
-          source={{
-            uri: book.volumeInfo.imageLinks.thumbnail,
-          }}
-        />
-      ) : (
-        <BookTemplate>
-          <BookTemplateText>Imagem indisponível</BookTemplateText>
-        </BookTemplate>
-      )}
+      <BookImage uri={book.volumeInfo.imageLinks?.thumbnail} />
       <BookInfo>
         <Title marginBottom={16} type="h3">
           {book.volumeInfo.title}
         </Title>
-        <InfoText label="Por">{book.volumeInfo.authors.join(', ')}</InfoText>
-        <InfoText last label="Editora">
+        <InfoText label="Por" type="secondary">
+          {book.volumeInfo.authors.join(', ')}
+        </InfoText>
+        <InfoText last type="secondary" label="Editora">
           {book.volumeInfo.publisher}
         </InfoText>
         <Button>

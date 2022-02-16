@@ -4,13 +4,14 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { BorderlessButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
+  flex: 1;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   height: 48px;
   border-radius: 24px;
-
   background-color: ${({ theme }) => theme.COLORS.SHAPE};
+  margin-right: 8px;
 `;
 
 export const Input = styled.TextInput.attrs(({ theme }) => {

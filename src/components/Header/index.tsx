@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from '@hooks/auth';
 
-import { IconButton } from '@components/IconButton';
+import { IconButton } from '@components/Buttons/IconButton';
 import {
   Avatar,
   AvatarTemplate,
