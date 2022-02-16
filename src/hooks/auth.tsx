@@ -7,6 +7,7 @@ import React, {
   useState,
 } from 'react';
 
+import { GOOGLE_WEB_CLIEND_ID } from 'react-native-dotenv';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -43,9 +44,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/books'],
-      webClientId:
-        '239213670592-b9rto0m2guemr1ostlpchsnkhehl9cso.apps.googleusercontent.com',
-      // offlineAccess: true,
+      webClientId: GOOGLE_WEB_CLIEND_ID,
     });
   }, []);
 
