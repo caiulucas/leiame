@@ -1,13 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { BookCard, Book as BookResponse } from '@components/BookCard';
+import { BookCard, Book as BookResponse } from '@components/Cards/BookCard';
 import { SearchInput } from '@components/SearchInput';
-
-import axios from 'axios';
 
 import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { BookNavigationProps } from '@routes/types';
 import { IconButton } from '@components/Buttons/IconButton';
+import { bookApi } from '@services/bookApi';
 import { Container, Content, Header } from './styles';
 
 export const Search: React.FC = () => {
@@ -24,10 +23,9 @@ export const Search: React.FC = () => {
   );
 
   const handleSearch = useCallback(async () => {
-    const response = await axios.get(
-      'https://www.googleapis.com/books/v1/volumes',
-      { params: { q: searchText } },
-    );
+    const response = await bookApi.get('/volumes', {
+      params: { q: searchText },
+    });
     setBooks(response.data.items);
   }, [searchText]);
 

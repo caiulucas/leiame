@@ -26,7 +26,7 @@ export const Header: React.FC = () => {
         )}
         <Greetings>Olá, {user.name}</Greetings>
       </UserArea>
-      <IconButton icon="camera" />
+      <IconButton icon="log-out" />
     </Container>
   );
 };

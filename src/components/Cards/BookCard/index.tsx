@@ -4,7 +4,8 @@ import { Title } from '@components/Texts/Title';
 import { InfoText } from '@components/Texts/InfoText';
 import { TouchableOpacityProps } from 'react-native';
 import { BookImage } from '@components/BookImage';
-import { BookInfo, Button, Container, Icon } from './styles';
+import { Container } from './styles';
+import { BookInfo, Button, Icon } from '../styles';
 
 export type Book = {
   id: string;

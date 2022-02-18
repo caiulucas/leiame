@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-export const api = axios.create({
-  baseURL: 'http://192.168.2.108:3333',
+export const bookApi = axios.create({
+  baseURL: 'https://www.googleapis.com/books/v1',
 });

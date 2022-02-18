@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import FastImage from 'react-native-fast-image';
 
 type ImageProps = {
   type: 'primary' | 'secondary';
@@ -9,7 +10,7 @@ const typeStyles = {
   primary: css`
     width: ${RFValue(96)}px;
     height: ${RFValue(144)}px;
-    border-radius: 8px;
+    border-radius: ${RFValue(8)}px;
   `,
   secondary: css`
     width: ${RFValue(144)}px;
@@ -17,7 +18,7 @@ const typeStyles = {
   `,
 };
 
-export const Container = styled.Image<ImageProps>`
+export const Container = styled(FastImage)<ImageProps>`
   ${({ type }) => typeStyles[type]}
 `;
 

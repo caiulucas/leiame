@@ -19,8 +19,6 @@ export const TabRoutes: React.FC = () => {
         tabBarInactiveTintColor: COLORS.PRIMARY_100,
         tabBarStyle: {
           height: 56,
-          borderTopRightRadius: 32,
-          borderTopLeftRadius: 32,
         },
       }}
     >

@@ -10,17 +10,13 @@ import React, {
 import { GOOGLE_WEB_CLIEND_ID } from 'react-native-dotenv';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
-
-// type AuthResponse = AuthSession.AuthSessionResult & {
-//   params: { access_token: string };
-// };
 
 type User = {
   name: string;
   email: string;
   avatar: string | null;
+  token: string;
 };
 
 type AuthContextData = {
@@ -28,19 +24,27 @@ type AuthContextData = {
   signIn: () => Promise<void>;
 };
 
-const storageKey = '@leiame:user';
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User>({} as User);
 
   useEffect(() => {
-    async function loadUser() {
-      const loadedUser = await AsyncStorage.getItem(storageKey);
-      if (loadedUser) setUser(JSON.parse(loadedUser));
+    async function fetchUser() {
+      const { currentUser } = auth();
+      const { accessToken } = await GoogleSignin.getTokens();
+
+      if (currentUser?.email && currentUser.displayName) {
+        setUser({
+          name: currentUser.displayName,
+          email: currentUser.email,
+          avatar: currentUser.photoURL,
+          token: accessToken,
+        });
+      }
     }
 
-    loadUser();
+    fetchUser();
 
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/books'],
@@ -53,18 +57,16 @@ export const AuthProvider: React.FC = ({ children }) => {
       const { idToken } = await GoogleSignin.signIn();
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       const response = await auth().signInWithCredential(googleCredential);
+      const { accessToken } = await GoogleSignin.getTokens();
 
       if (response.user.email && response.user.displayName) {
         const authenticatedUser: User = {
           name: response.user.displayName,
           email: response.user.email,
           avatar: response.user.photoURL,
+          token: accessToken,
         };
 
-        await AsyncStorage.setItem(
-          storageKey,
-          JSON.stringify(authenticatedUser),
-        );
         setUser(authenticatedUser);
       }
     } catch (error) {

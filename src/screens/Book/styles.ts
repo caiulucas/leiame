@@ -3,9 +3,12 @@ import { StatusBar } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
-export const Container = styled.ScrollView`
+export const Container = styled.View`
+  /* background-color: ${({ theme }) => theme.COLORS.BACKGROUND}; */
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
 `;
+
+export const ScrollContent = styled.ScrollView``;
 
 export const Header = styled.View`
   background-color: ${({ theme }) => theme.COLORS.SHAPE};
@@ -67,15 +70,4 @@ export const InfoArea = styled.View`
   padding: 16px 0;
   border-bottom-width: 1px;
   border-bottom-color: ${({ theme }) => theme.COLORS.SHAPE};
-`;
-
-export const MoreBooksArea = styled.View`
-  margin-bottom: 64px;
-`;
-
-export const TitleArea = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin: 16px 24px;
 `;

@@ -1,5 +1,4 @@
 import { BookImage } from '@components/BookImage';
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { TouchableOpacityProps } from 'react-native';
 
@@ -23,7 +22,7 @@ type BookLeafletProps = TouchableOpacityProps & {
 export const BookLeaflet: React.FC<BookLeafletProps> = ({ book, ...rest }) => {
   return (
     <Container {...rest}>
-      <BookImage uri={book.volumeInfo.imageLinks.thumbnail} />
+      <BookImage uri={book.volumeInfo.imageLinks?.thumbnail} />
       <Title numberOfLines={2}>{book.volumeInfo.title}</Title>
     </Container>
   );

@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
-import StarSvg from '@assets/star.svg';
-import HalfStarSvg from '@assets/halfstar.svg';
 import axios from 'axios';
 
 import { Title } from '@components/Texts/Title';
@@ -10,12 +7,10 @@ import { TextButton } from '@components/Buttons/TextButton';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Button } from '@components/Buttons/Button';
 import { BookImage } from '@components/BookImage';
-import {
-  BookLeaflet,
-  Book as MoreBooksResponse,
-} from '@components/BookLeaflet';
-import { FlatList } from 'react-native-gesture-handler';
-import { BookNavigationProps } from '@routes/types';
+import { Book as BookshelfResponse } from '@components/BookLeaflet';
+import { BottomSheet } from '@components/BottomSheet';
+import { bookApi } from '@services/bookApi';
+import { Bookshelf } from '@components/Bookshelf';
 import {
   Author,
   BackButton,
@@ -26,10 +21,8 @@ import {
   Description,
   Header,
   InfoArea,
-  MoreBooksArea,
-  StarGroup,
+  ScrollContent,
   SynopsisArea,
-  TitleArea,
 } from './styles';
 
 type IndustryIdentifier = {
@@ -54,13 +47,16 @@ type BookResponse = {
 };
 
 export const Book: React.FC = () => {
-  const { goBack, push } = useNavigation<BookNavigationProps>();
+  const { goBack } = useNavigation();
   const { params } = useRoute();
   const { selfLink } = params as { selfLink: string };
 
   const [book, setBook] = useState<BookResponse>({} as BookResponse);
-  const [moreBooks, setMoreBooks] = useState<MoreBooksResponse[]>([]);
+  const [authorBookshelf, setAuthorBookshelf] = useState<BookshelfResponse[]>(
+    [],
+  );
   const [readMore, setReadMore] = useState(false);
+  const [bottomSheetIsVisible, setBottomSheetIsVisible] = useState(false);
 
   useEffect(() => {
     async function fetchBook() {
@@ -75,13 +71,12 @@ export const Book: React.FC = () => {
         )[0],
       };
 
-      const { data: moreBooksData } = await axios.get(
-        'https://www.googleapis.com/books/v1/volumes',
-        { params: { q: `inauthor:${formattedBook.authors}` } },
-      );
+      const { data: moreBooksData } = await bookApi.get('/volumes', {
+        params: { q: `inauthor:${formattedBook.authors}` },
+      });
 
       setBook(formattedBook);
-      setMoreBooks(moreBooksData.items);
+      setAuthorBookshelf(moreBooksData.items);
     }
 
     fetchBook();
@@ -90,27 +85,22 @@ export const Book: React.FC = () => {
   return (
     <Container>
       {book.id && (
-        <>
+        <ScrollContent>
           <Header>
             <BackButton icon="chevron-left" onPress={goBack} />
             <BookImage
               type="secondary"
-              uri={book.volumeInfo.imageLinks.medium}
+              uri={book.volumeInfo.imageLinks?.medium}
             />
-
-            <StarGroup>
-              <StarSvg />
-              <StarSvg />
-              <StarSvg />
-              <StarSvg />
-              <HalfStarSvg />
-            </StarGroup>
 
             <BookTitle>{book.volumeInfo.title}</BookTitle>
             <Author>{book.authors}</Author>
           </Header>
           <Content>
-            <Button title="Adicionar" />
+            <Button
+              title="Adicionar"
+              onPress={() => setBottomSheetIsVisible(true)}
+            />
             <SynopsisArea>
               <Title type="h2">Sinopse</Title>
               <Description numberOfLines={readMore ? 0 : 5}>
@@ -135,31 +125,11 @@ export const Book: React.FC = () => {
             </InfoArea>
           </Content>
 
-          <MoreBooksArea>
-            <TitleArea>
-              <Title type="h2">Mais do autor</Title>
-              <TextButton title="Ver mais" />
-            </TitleArea>
-
-            <FlatList
-              data={moreBooks}
-              keyExtractor={item => item.id}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{ paddingLeft: 24, paddingRight: 8 }}
-              renderItem={({ item }) => (
-                <BookLeaflet
-                  book={item}
-                  onPress={() =>
-                    push('book', {
-                      selfLink: item.selfLink,
-                    })
-                  }
-                />
-              )}
-            />
-          </MoreBooksArea>
-        </>
+          <Bookshelf title="Mais do autor" bookshelf={authorBookshelf} />
+        </ScrollContent>
+      )}
+      {bottomSheetIsVisible && (
+        <BottomSheet setIsVisible={setBottomSheetIsVisible} />
       )}
     </Container>
   );
