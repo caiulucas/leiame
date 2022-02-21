@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Button } from '@components/Buttons/Button';
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
 } from '@gorhom/bottom-sheet';
-
-import { BookResponse, Status, useBooks } from '@hooks/books';
-import { Button } from '@components/Buttons/Button';
+import { BookResponse, useBooks } from '@hooks/books';
 import { TextInput } from 'react-native';
-import { Container, Title, Span, Input } from './styles';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { Container, Input, Span, Title } from './styles';
 
 type PageSheetProps = {
   setIsVisible: (isVisible: boolean) => void;
@@ -56,7 +56,7 @@ export const PageSheet: React.FC<PageSheetProps> = ({
           ref={sheetRef}
           index={0}
           snapPoints={['50%']}
-          style={{ paddingHorizontal: 24 }}
+          style={{ paddingHorizontal: RFValue(24) }}
           onDismiss={() => setIsVisible(false)}
         >
           <Title>

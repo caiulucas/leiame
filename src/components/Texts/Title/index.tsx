@@ -14,15 +14,8 @@ export const Title: React.FC<TitleProps> = ({
   children,
 }) => {
   return (
-    <Container
-      style={{ marginBottom: RFValue(Number(marginBottom)) }}
-      type={type}
-    >
+    <Container style={{ marginBottom: RFValue(marginBottom || 0) }} type={type}>
       {children}
     </Container>
   );
-};
-
-Title.defaultProps = {
-  marginBottom: 0,
 };

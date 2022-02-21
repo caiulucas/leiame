@@ -1,7 +1,6 @@
 import React from 'react';
-import { useAuth } from '@hooks/auth';
-
 import { IconButton } from '@components/Buttons/IconButton';
+import { useAuth } from '@hooks/auth';
 import {
   Avatar,
   AvatarTemplate,
@@ -12,7 +11,7 @@ import {
 } from './styles';
 
 export const Header: React.FC = () => {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
 
   return (
     <Container>
@@ -26,7 +25,7 @@ export const Header: React.FC = () => {
         )}
         <Greetings>Olá, {user.name}</Greetings>
       </UserArea>
-      <IconButton icon="log-out" />
+      <IconButton icon="log-out" onPress={signOut} />
     </Container>
   );
 };

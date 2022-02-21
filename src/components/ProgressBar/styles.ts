@@ -1,6 +1,6 @@
+import LinearGradient from 'react-native-linear-gradient';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
-import LinearGradient from 'react-native-linear-gradient';
 
 type GradientProps = {
   percentage: string;

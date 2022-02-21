@@ -1,3 +1,4 @@
+import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
 export const Container = styled.ScrollView`
@@ -6,5 +7,5 @@ export const Container = styled.ScrollView`
 `;
 
 export const Content = styled.ScrollView`
-  padding: 0 24px;
+  padding: 0 ${RFValue(24)}px;
 `;

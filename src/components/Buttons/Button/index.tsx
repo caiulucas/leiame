@@ -1,5 +1,6 @@
 import React from 'react';
 import { RectButtonProps } from 'react-native-gesture-handler';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 import { BorderView, Container, Icon, Title } from './styles';
 
@@ -18,7 +19,11 @@ export const Button: React.FC<ButtonProps> = ({
   ...rest
 }) => {
   return (
-    <Container outline={outline} style={{ marginBottom }} {...rest}>
+    <Container
+      outline={outline}
+      style={{ marginBottom: RFValue(marginBottom) }}
+      {...rest}
+    >
       <BorderView>
         <Title outline={outline}>{title}</Title>
         {hasIcon && <Icon />}

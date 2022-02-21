@@ -1,12 +1,13 @@
+import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  margin-bottom: 16px;
+  margin-bottom: ${RFValue(16)}px;
 `;
 
 export const TitleArea = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 16px 24px;
+  margin: ${RFValue(16)}px ${RFValue(24)}px;
 `;

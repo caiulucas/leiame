@@ -4,9 +4,9 @@ import { RectButton } from 'react-native-gesture-handler';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export const Container = styled(RectButton)`
-  height: 48px;
+  height: ${RFValue(48)}px;
   width: 100%;
-  border-radius: 24px;
+  border-radius: ${RFValue(24)}px;
 
   justify-content: center;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
@@ -14,9 +14,9 @@ export const Container = styled(RectButton)`
 
 export const Icon = styled(MaterialCommunityIcons).attrs({ name: 'google' })`
   position: absolute;
-  height: 24px;
-  bottom: 12px;
-  left: 16px;
+  height: ${RFValue(24)}px;
+  bottom: ${RFValue(12)}px;
+  left: ${RFValue(16)}px;
 
   color: ${({ theme }) => theme.COLORS.PRIMARY_900};
 `;

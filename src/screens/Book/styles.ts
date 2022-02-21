@@ -4,7 +4,6 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  /* background-color: ${({ theme }) => theme.COLORS.BACKGROUND}; */
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
 `;
 
@@ -12,21 +11,22 @@ export const ScrollContent = styled.ScrollView``;
 
 export const Header = styled.View`
   background-color: ${({ theme }) => theme.COLORS.SHAPE};
-  border-bottom-left-radius: 64px;
-  padding: ${Number(StatusBar.currentHeight) + 48}px 24px 24px;
+  border-bottom-left-radius: ${RFValue(64)}px;
+  padding: ${Number(StatusBar.currentHeight) + RFValue(48)}px ${RFValue(24)}px
+    ${RFValue(24)}px;
   justify-content: center;
   align-items: center;
 `;
 
 export const BackButton = styled(IconButton)`
   position: absolute;
-  top: ${Number(StatusBar.currentHeight) + 24}px;
-  left: 24px;
+  top: ${Number(StatusBar.currentHeight) + RFValue(24)}px;
+  left: ${RFValue(24)}px;
 `;
 
 export const StarGroup = styled.View`
   flex-direction: row;
-  margin: 16px 0;
+  margin: ${RFValue(16)}px 0;
 `;
 
 export const BookTitle = styled.Text`
@@ -40,18 +40,18 @@ export const Author = styled.Text`
   font-size: ${RFValue(16)}px;
   font-family: ${({ theme }) => theme.FONTS.LABEL};
   color: ${({ theme }) => theme.COLORS.TEXT};
-  margin-top: 8px;
+  margin-top: ${RFValue(8)}px;
 `;
 
 export const PercentageArea = styled.View`
-  margin-bottom: 8px;
+  margin-bottom: ${RFValue(8)}px;
 `;
 
 export const PercentageText = styled.Text`
   font-size: ${RFValue(16)}px;
   font-family: ${({ theme }) => theme.FONTS.TITLE};
   color: ${({ theme }) => theme.COLORS.TEXT};
-  margin-top: 8px;
+  margin-top: ${RFValue(8)}px;
 `;
 
 export const PercentageSpan = styled(PercentageText)`
@@ -59,13 +59,13 @@ export const PercentageSpan = styled(PercentageText)`
 `;
 
 export const Content = styled.View`
-  padding: 40px 24px 0px;
+  padding: ${RFValue(40)}px ${RFValue(24)}px 0px;
 `;
 
 export const SynopsisArea = styled.View`
   border-bottom-width: 1px;
   border-bottom-color: ${({ theme }) => theme.COLORS.SHAPE};
-  padding: 32px 0 16px;
+  padding: ${RFValue(32)}px 0 ${RFValue(16)}px;
 `;
 
 export const Description = styled.Text`
@@ -74,7 +74,7 @@ export const Description = styled.Text`
   color: ${({ theme }) => theme.COLORS.TEXT};
   line-height: ${RFValue(21)}px;
   text-align: justify;
-  margin: 16px 0;
+  margin: ${RFValue(16)}px 0;
 `;
 
 export const ButtonArea = styled.View`
@@ -82,7 +82,7 @@ export const ButtonArea = styled.View`
 `;
 
 export const InfoArea = styled.View`
-  padding: 16px 0;
+  padding: ${RFValue(16)}px 0;
   border-bottom-width: 1px;
   border-bottom-color: ${({ theme }) => theme.COLORS.SHAPE};
 `;

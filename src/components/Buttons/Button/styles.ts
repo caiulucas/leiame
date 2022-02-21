@@ -1,5 +1,5 @@
 import { RectButton } from 'react-native-gesture-handler';
-import styled, { css } from 'styled-components/native';
+import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 
@@ -23,7 +23,7 @@ export const BorderView = styled.View`
   width: 100%;
 
   border-color: ${({ theme }) => theme.COLORS.PRIMARY_500};
-  border-width: 2px;
+  border-width: ${RFValue(2)}px;
 
   border-radius: ${RFValue(24)}px;
 

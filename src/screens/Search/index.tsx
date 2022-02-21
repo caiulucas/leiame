@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { BookNavigationProps } from '@routes/types';
 import { IconButton } from '@components/Buttons/IconButton';
 import { bookApi } from '@services/bookApi';
+import { RFValue } from 'react-native-responsive-fontsize';
 import { Container, Content, Header } from './styles';
 
 export const Search: React.FC = () => {
@@ -46,7 +47,7 @@ export const Search: React.FC = () => {
           data={books}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingTop: 24 }}
+          contentContainerStyle={{ paddingTop: RFValue(24) }}
           renderItem={({ item }) => (
             <BookCard
               book={item}

@@ -22,6 +22,9 @@ justify-content: center;
 background-color: ${({ theme }) => theme.COLORS.SHAPE};
 `;
 
-export const Icon = styled(Feather).attrs({ name: 'arrow-right', size: 16 })`
+export const Icon = styled(Feather).attrs({
+  name: 'arrow-right',
+  size: RFValue(16),
+})`
   color: ${({ theme }) => theme.COLORS.PRIMARY_900};
 `;

@@ -4,7 +4,8 @@ import styled from 'styled-components/native';
 import { StatusBar } from 'react-native';
 
 export const Container = styled.View`
-  padding: ${Number(StatusBar.currentHeight) + 24}px 24px 24px;
+  padding: ${Number(StatusBar.currentHeight) + RFValue(24)}px ${RFValue(24)}px
+    ${RFValue(23)}px;
   flex-direction: row;
   justify-content: space-between;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
@@ -16,9 +17,9 @@ export const UserArea = styled.View`
 `;
 
 export const AvatarTemplate = styled.View`
-  height: 48px;
-  width: 48px;
-  border-radius: 24px;
+  height: ${RFValue(48)}px;
+  width: ${RFValue(48)}px;
+  border-radius: ${RFValue(24)}px;
   border-width: 1px;
   border-color: ${({ theme }) => theme.COLORS.PRIMARY_500};
   background-color: ${({ theme }) => theme.COLORS.SHAPE};
@@ -29,15 +30,15 @@ export const AvatarTemplate = styled.View`
 
 export const UserIcon = styled(Feather).attrs({
   name: 'user',
-  size: 32,
+  size: RFValue(32),
 })`
   color: ${({ theme }) => theme.COLORS.PRIMARY_500};
 `;
 
 export const Avatar = styled.Image`
-  height: 48px;
-  width: 48px;
-  border-radius: 24px;
+  height: ${RFValue(48)}px;
+  width: ${RFValue(48)}px;
+  border-radius: ${RFValue(24)}px;
   border-width: 1px;
   border-color: ${({ theme }) => theme.COLORS.PRIMARY_500};
 `;
@@ -47,5 +48,5 @@ export const Greetings = styled.Text`
   font-family: ${({ theme }) => theme.FONTS.TITLE};
   color: ${({ theme }) => theme.COLORS.PRIMARY_500};
 
-  margin-left: 8px;
+  margin-left: ${RFValue(8)}px;
 `;

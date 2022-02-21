@@ -22,6 +22,7 @@ type User = {
 type AuthContextData = {
   user: User;
   signIn: () => Promise<void>;
+  signOut: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -74,7 +75,16 @@ export const AuthProvider: React.FC = ({ children }) => {
     }
   }, []);
 
-  const value = useMemo(() => ({ user, signIn }), [user, signIn]);
+  const signOut = useCallback(async () => {
+    await GoogleSignin.signOut();
+    await auth().signOut();
+    setUser({} as User);
+  }, []);
+
+  const value = useMemo(
+    () => ({ user, signIn, signOut }),
+    [user, signIn, signOut],
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

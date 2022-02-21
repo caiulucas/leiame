@@ -4,6 +4,7 @@ import { Title } from '@components/Texts/Title';
 import { InfoText } from '@components/Texts/InfoText';
 import { TouchableOpacityProps } from 'react-native';
 import { BookImage } from '@components/BookImage';
+import { RFValue } from 'react-native-responsive-fontsize';
 import { Container } from './styles';
 import { BookInfo, Button, Icon } from '../styles';
 
@@ -30,7 +31,7 @@ export const BookCard: React.FC<BookCardProps> = ({ book, ...rest }) => {
     <Container {...rest}>
       <BookImage uri={book.volumeInfo.imageLinks?.thumbnail} />
       <BookInfo>
-        <Title marginBottom={16} type="h3">
+        <Title marginBottom={RFValue(16)} type="h3">
           {book.volumeInfo.title}
         </Title>
         <InfoText label="Por" type="secondary">

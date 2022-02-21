@@ -18,7 +18,7 @@ export const Container = styled.TouchableOpacity.attrs({
 
 export const Option = styled(RectButton)<OptionProps>`
   width: 100%;
-  height: 48px;
+  height: ${RFValue(48)}px;
   justify-content: center;
   align-items: center;
   background-color: ${({ theme, selected }) =>

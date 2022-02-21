@@ -12,8 +12,7 @@ import { bookApi } from '@services/bookApi';
 import { Bookshelf } from '@components/Bookshelf';
 import { useBooks, BookResponse } from '@hooks/books';
 import { ProgressBar } from '@components/ProgressBar';
-import { StatusBar } from 'react-native';
-import { useTheme } from 'styled-components';
+
 import { PageSheet } from '@components/PageSheet';
 import {
   Author,
@@ -42,7 +41,6 @@ export const Book: React.FC = () => {
   const { goBack } = useNavigation();
   const { params } = useRoute();
   const { fetchBook } = useBooks();
-  const { COLORS } = useTheme();
 
   const { selfLink } = params as { selfLink: string };
 

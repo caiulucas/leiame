@@ -7,6 +7,7 @@ import { FlatList } from 'react-native';
 import { BookLeaflet, Book } from '@components/BookLeaflet';
 import { useNavigation } from '@react-navigation/native';
 import { BookNavigationProps } from '@routes/types';
+import { RFValue } from 'react-native-responsive-fontsize';
 import { Container, TitleArea } from './styles';
 
 type BookshelfProps = {
@@ -29,7 +30,10 @@ export const Bookshelf: React.FC<BookshelfProps> = ({ title, bookshelf }) => {
         keyExtractor={item => item.id}
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingLeft: 24, paddingRight: 8 }}
+        contentContainerStyle={{
+          paddingLeft: RFValue(24),
+          paddingRight: RFValue(8),
+        }}
         renderItem={({ item }) => (
           <BookLeaflet
             book={item}

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useAuth } from '@hooks/auth';
 
 import { Bookshelf } from '@components/Bookshelf';
