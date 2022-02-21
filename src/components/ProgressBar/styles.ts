@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 
 type GradientProps = {
-  percentage: number;
+  percentage: string;
 };
 
 export const Container = styled.View`

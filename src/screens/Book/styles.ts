@@ -43,6 +43,21 @@ export const Author = styled.Text`
   margin-top: 8px;
 `;
 
+export const PercentageArea = styled.View`
+  margin-bottom: 8px;
+`;
+
+export const PercentageText = styled.Text`
+  font-size: ${RFValue(16)}px;
+  font-family: ${({ theme }) => theme.FONTS.TITLE};
+  color: ${({ theme }) => theme.COLORS.TEXT};
+  margin-top: 8px;
+`;
+
+export const PercentageSpan = styled(PercentageText)`
+  color: ${({ theme }) => theme.COLORS.PRIMARY_500};
+`;
+
 export const Content = styled.View`
   padding: 40px 24px 0px;
 `;

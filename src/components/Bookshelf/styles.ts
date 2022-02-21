@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  margin-bottom: 64px;
+  margin-bottom: 16px;
 `;
 
 export const TitleArea = styled.View`

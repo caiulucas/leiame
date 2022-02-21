@@ -4,9 +4,10 @@ import styled from 'styled-components/native';
 import { StatusBar } from 'react-native';
 
 export const Container = styled.View`
-  margin: ${Number(StatusBar.currentHeight) + 24}px 24px 24px;
+  padding: ${Number(StatusBar.currentHeight) + 24}px 24px 24px;
   flex-direction: row;
   justify-content: space-between;
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
 `;
 
 export const UserArea = styled.View`
