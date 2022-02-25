@@ -8,8 +8,17 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#7733D6"
+    },
     "android": {
-      "package": "com.lienscarlet.leiame"
+      "package": "com.lienscarlet.leiame",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#7733D6"
+      }
     }
   },
   "name": "Leia-me"

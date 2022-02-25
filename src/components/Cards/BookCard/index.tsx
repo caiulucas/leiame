@@ -35,7 +35,7 @@ export const BookCard: React.FC<BookCardProps> = ({ book, ...rest }) => {
           {book.volumeInfo.title}
         </Title>
         <InfoText label="Por" type="secondary">
-          {book.volumeInfo.authors.join(', ')}
+          {book.volumeInfo.authors?.join(', ')}
         </InfoText>
         <InfoText last type="secondary" label="Editora">
           {book.volumeInfo.publisher}

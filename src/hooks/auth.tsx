@@ -6,8 +6,9 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
 
-import { GOOGLE_WEB_CLIEND_ID } from 'react-native-dotenv';
+import { GOOGLE_WEB_CLIENT_ID } from 'react-native-dotenv';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 import auth from '@react-native-firebase/auth';
@@ -43,13 +44,14 @@ export const AuthProvider: React.FC = ({ children }) => {
           token: accessToken,
         });
       }
+      await SplashScreen.hideAsync();
     }
 
     fetchUser();
 
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/books'],
-      webClientId: GOOGLE_WEB_CLIEND_ID,
+      webClientId: GOOGLE_WEB_CLIENT_ID,
     });
   }, []);
 

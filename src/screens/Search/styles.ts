@@ -9,7 +9,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   margin: ${Number(StatusBar.currentHeight) + RFValue(24)}px ${RFValue(24)}px
-    ${RFValue(24)}px;
+    ${RFValue(8)}px;
   flex-direction: row;
   justify-content: space-between;
 `;

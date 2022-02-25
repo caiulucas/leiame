@@ -6,9 +6,7 @@ import { TextButton } from '@components/Buttons/TextButton';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Button } from '@components/Buttons/Button';
 import { BookImage } from '@components/BookImage';
-import { Book as BookshelfResponse } from '@components/BookLeaflet';
 import { BottomSheet } from '@components/BottomSheet';
-import { bookApi } from '@services/bookApi';
 import { Bookshelf } from '@components/Bookshelf';
 import { useBooks, BookResponse } from '@hooks/books';
 import { ProgressBar } from '@components/ProgressBar';
@@ -42,43 +40,39 @@ export const Book: React.FC = () => {
   const { params } = useRoute();
   const { fetchBook } = useBooks();
 
-  const { selfLink } = params as { selfLink: string };
+  const { selfLink, book: paramBook } = params as {
+    selfLink: string;
+    book: BookResponse | undefined;
+  };
 
+  const [loading, setLoading] = useState(true);
   const [book, setBook] = useState<BookResponse>({} as BookResponse);
-  const [authorBookshelf, setAuthorBookshelf] = useState<BookshelfResponse[]>(
-    [],
-  );
   const [readMore, setReadMore] = useState(false);
   const [bottomSheetIsVisible, setBottomSheetIsVisible] = useState(false);
   const [pageSheetIsVisible, setPageSheetIsVisible] = useState(false);
 
   useEffect(() => {
     async function loadBook() {
-      const fetchedBook = await fetchBook(selfLink);
-
-      if (fetchedBook) {
-        setBook(fetchedBook);
-
-        const { data: moreBooksData } = await bookApi.get('/volumes', {
-          params: { q: `inauthor:${fetchedBook.authors}` },
-        });
-
-        setAuthorBookshelf(moreBooksData.items);
+      if (paramBook) {
+        setBook(paramBook);
+      } else {
+        const fetchedBook = await fetchBook(selfLink);
+        if (fetchedBook) setBook(fetchedBook);
       }
+      setLoading(false);
     }
-
     loadBook();
-  }, [fetchBook, selfLink]);
+  }, [fetchBook, selfLink, paramBook]);
 
   return (
     <Container>
-      {book.id && (
+      {!loading && (
         <ScrollContent showsVerticalScrollIndicator={false}>
           <Header>
             <BackButton icon="chevron-left" onPress={goBack} />
             <BookImage
               type="secondary"
-              uri={book.volumeInfo.imageLinks?.medium}
+              uri={book.volumeInfo.imageLinks?.large}
             />
 
             <BookTitle>{book.volumeInfo.title}</BookTitle>
@@ -91,9 +85,7 @@ export const Book: React.FC = () => {
                   <ProgressBar percentage={book.readingPercentage} />
                   <PercentageText>
                     <PercentageSpan>{book.actualPage || 0}</PercentageSpan> de{' '}
-                    <PercentageSpan>
-                      {book.volumeInfo.printedPageCount}
-                    </PercentageSpan>{' '}
+                    <PercentageSpan>{book.volumeInfo.pageCount}</PercentageSpan>{' '}
                     páginas lidas
                   </PercentageText>
                 </PercentageArea>
@@ -125,7 +117,7 @@ export const Book: React.FC = () => {
             <InfoArea>
               <InfoText label="Editora">{book.volumeInfo.publisher}</InfoText>
               <InfoText label="N de páginas">
-                {book.volumeInfo.printedPageCount}
+                {book.volumeInfo.pageCount}
               </InfoText>
               <InfoText label="Data de lançamento">
                 {book.volumeInfo.publishedDate}
@@ -134,7 +126,10 @@ export const Book: React.FC = () => {
             </InfoArea>
           </Content>
 
-          <Bookshelf title="Mais do autor" bookshelf={authorBookshelf} />
+          <Bookshelf
+            title="Mais do autor"
+            path={`/volumes?q=inauthor:${book.authors}`}
+          />
         </ScrollContent>
       )}
       {bottomSheetIsVisible && (

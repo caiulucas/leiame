@@ -5,7 +5,7 @@ import { StatusBar } from 'react-native';
 
 export const Container = styled.View`
   padding: ${Number(StatusBar.currentHeight) + RFValue(24)}px ${RFValue(24)}px
-    ${RFValue(23)}px;
+    ${RFValue(8)}px;
   flex-direction: row;
   justify-content: space-between;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
@@ -13,6 +13,7 @@ export const Container = styled.View`
 
 export const UserArea = styled.View`
   flex-direction: row;
+  flex: 1;
   align-items: center;
 `;
 
@@ -47,6 +48,6 @@ export const Greetings = styled.Text`
   font-size: ${RFValue(16)}px;
   font-family: ${({ theme }) => theme.FONTS.TITLE};
   color: ${({ theme }) => theme.COLORS.PRIMARY_500};
-
-  margin-left: ${RFValue(8)}px;
+  flex: 1;
+  margin: 0 ${RFValue(8)}px;
 `;

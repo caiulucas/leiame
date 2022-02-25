@@ -4,6 +4,9 @@ import { ProgressBar } from '@components/ProgressBar';
 import { InfoText } from '@components/Texts/InfoText';
 import { Title } from '@components/Texts/Title';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { BookResponse } from '@hooks/books';
+import { useNavigation } from '@react-navigation/native';
+import { BookNavigationProps } from '@routes/types';
 import { Button, Icon } from '../styles';
 import {
   BookInfo,
@@ -13,21 +16,30 @@ import {
   ProgressText,
 } from './styles';
 
-export const BookDetailCard: React.FC = () => {
+type BookDetailCardProps = {
+  book: BookResponse;
+};
+
+export const BookDetailCard: React.FC<BookDetailCardProps> = ({ book }) => {
+  const { navigate } = useNavigation<BookNavigationProps>();
+
   return (
-    <Container>
-      <BookImage />
+    <Container
+      onPress={() => navigate('book', { selfLink: book.selfLink, book })}
+    >
+      <BookImage uri={book.volumeInfo.imageLinks.large} />
       <BookInfo>
         <Title marginBottom={RFValue(8)} type="h3">
-          O Senhor dos Anéis: A Sociedade do Anel
+          {book.volumeInfo.title}
         </Title>
         <InfoText label="Por" type="secondary">
-          J. R. R. Tolkien
+          {book.authors}
         </InfoText>
         <ProgressArea>
-          <ProgressBar percentage="42" />
+          <ProgressBar percentage={book.readingPercentage} />
           <ProgressText>
-            <ProgressSpan>288</ProgressSpan> de <ProgressSpan>576</ProgressSpan>
+            <ProgressSpan>{book.actualPage || 0}</ProgressSpan> de{' '}
+            <ProgressSpan>{book.volumeInfo.pageCount}</ProgressSpan>
           </ProgressText>
         </ProgressArea>
       </BookInfo>
