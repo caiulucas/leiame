@@ -10,6 +10,8 @@ import { useBooks } from '@hooks/books';
 import { View } from 'react-native';
 import { Container, Content } from './styles';
 
+const bookshelvesTitles = ['Lendo', 'Vou ler', 'Já li'];
+
 export const Home: React.FC = () => {
   const { lastReadBook } = useBooks();
 
@@ -27,10 +29,10 @@ export const Home: React.FC = () => {
           </Content>
         )}
 
-        {[3, 2, 4].map(bookshelfId => (
+        {[3, 2, 4].map((bookshelfId, index) => (
           <View key={bookshelfId}>
             <Bookshelf
-              title="Lendo"
+              title={bookshelvesTitles[index]}
               path={`/mylibrary/bookshelves/${bookshelfId}/volumes`}
             />
             <Separator key={bookshelfId} />

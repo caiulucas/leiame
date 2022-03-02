@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BookCard, Book as BookResponse } from '@components/Cards/BookCard';
 import { SearchInput } from '@components/SearchInput';
 
@@ -8,14 +8,20 @@ import { BookNavigationProps } from '@routes/types';
 import { IconButton } from '@components/Buttons/IconButton';
 import { bookApi } from '@services/bookApi';
 import { useAuth } from '@hooks/auth';
-import { Container, Content, Header } from './styles';
+import { Title } from '@components/Texts/Title';
+import { Container, Content, Header, InputArea, TitleArea } from './styles';
 import { SkeletonSearch } from './skeleton';
 
-export const Search: React.FC = () => {
+type SearchParams = {
+  q?: string;
+  startIndex: number;
+};
+
+export const BookshelfSearch: React.FC = () => {
   const { user } = useAuth();
-  const { navigate } = useNavigation<BookNavigationProps>();
+  const { navigate, goBack } = useNavigation<BookNavigationProps>();
   const { params } = useRoute();
-  const { urlPath } = params as { urlPath: string };
+  const { path } = params as { path: string };
 
   const [searchText, setSearchText] = useState('');
   const [page, setPage] = useState(0);
@@ -32,14 +38,18 @@ export const Search: React.FC = () => {
   const handleSearch = useCallback(
     async (actualPage: number) => {
       setLoading(true);
-      const { data } = await bookApi.get(urlPath, {
-        params: { q: searchText, startIndex: actualPage * 10 },
-        headers: { Authentication: `Bearer ${user.token}` },
+      const searchParams: SearchParams = { startIndex: actualPage * 10 };
+
+      if (searchText) searchParams.q = searchText;
+      const { data } = await bookApi.get(path, {
+        params: searchParams,
+        headers: { Authorization: `Bearer ${user.token}` },
       });
+      books.forEach(book => console.log(book.volumeInfo.title));
       if (data.items) setBooks(value => [...value, ...data.items]);
       setLoading(false);
     },
-    [searchText, urlPath, user.token],
+    [books, path, searchText, user.token],
   );
 
   const handleAddPage = useCallback(() => {
@@ -47,20 +57,32 @@ export const Search: React.FC = () => {
     setPage(page + 1);
   }, [handleSearch, page]);
 
+  useEffect(() => {
+    handleSearch(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Container>
       <Header>
-        <SearchInput
-          value={searchText}
-          onChangeText={setSearchText}
-          onPress={() => {
-            handleSearch(0);
-            setPage(0);
-            setBooks([]);
-          }}
-        />
-
-        <IconButton icon="camera" />
+        <TitleArea>
+          <IconButton icon="chevron-left" type="secondary" onPress={goBack} />
+          <Title type="h1" marginLeft={8}>
+            Última leitura
+          </Title>
+        </TitleArea>
+        <InputArea>
+          <SearchInput
+            marginRight={0}
+            value={searchText}
+            onChangeText={setSearchText}
+            onPress={() => {
+              handleSearch(0);
+              setPage(0);
+              setBooks([]);
+            }}
+          />
+        </InputArea>
       </Header>
 
       <Content>
@@ -69,8 +91,7 @@ export const Search: React.FC = () => {
         ) : (
           <FlatList
             data={books}
-            keyExtractor={item => item.id}
-            onEndReachedThreshold={10}
+            keyExtractor={item => item.etag}
             onEndReached={handleAddPage}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (

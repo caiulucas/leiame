@@ -34,6 +34,7 @@ export const TabRoutes: React.FC = () => {
       <Screen
         name="search"
         component={Search}
+        initialParams={{ urlPath: '/volumes', searchOnLoad: false }}
         options={{
           tabBarIcon: ({ color }) => (
             <Feather name="compass" size={32} color={color} />

@@ -22,6 +22,8 @@ import {
   Description,
   Header,
   InfoArea,
+  Loader,
+  LoaderArea,
   PercentageArea,
   PercentageSpan,
   PercentageText,
@@ -58,6 +60,7 @@ export const Book: React.FC = () => {
       } else {
         const fetchedBook = await fetchBook(selfLink);
         if (fetchedBook) setBook(fetchedBook);
+        // console.log(fetchedBook.status);
       }
       setLoading(false);
     }
@@ -66,7 +69,11 @@ export const Book: React.FC = () => {
 
   return (
     <Container>
-      {!loading && (
+      {loading ? (
+        <LoaderArea>
+          <Loader />
+        </LoaderArea>
+      ) : (
         <ScrollContent showsVerticalScrollIndicator={false}>
           <Header>
             <BackButton icon="chevron-left" onPress={goBack} />
@@ -122,7 +129,9 @@ export const Book: React.FC = () => {
               <InfoText label="Data de lançamento">
                 {book.volumeInfo.publishedDate}
               </InfoText>
-              <InfoText label="ISBN">{book.isbn?.identifier}</InfoText>
+              <InfoText last label="ISBN">
+                {book.isbn?.identifier}
+              </InfoText>
             </InfoArea>
           </Content>
 

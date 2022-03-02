@@ -10,14 +10,16 @@ export const Container = styled.View`
 export const Header = styled.View`
   margin: ${Number(StatusBar.currentHeight) + RFValue(24)}px ${RFValue(24)}px
     ${RFValue(8)}px;
-  flex-direction: row;
-  justify-content: space-between;
 `;
 
 export const TitleArea = styled.View`
   flex-direction: row;
   align-items: center;
   margin-bottom: ${RFValue(8)}px;
+`;
+
+export const InputArea = styled.View`
+  flex-direction: row;
 `;
 
 export const Content = styled.View`

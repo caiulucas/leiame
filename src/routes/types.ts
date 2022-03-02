@@ -5,6 +5,7 @@ export type RootStackParamList = {
   book: { selfLink: string; book?: BookResponse };
   tab: undefined;
   search: undefined;
+  bookshelfSearch: { path: string };
 };
 
 export type BookNavigationProps = NativeStackNavigationProp<

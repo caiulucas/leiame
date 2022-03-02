@@ -5,16 +5,24 @@ import { Container } from './styles';
 
 type TitleProps = {
   marginBottom?: number;
+  marginLeft?: number;
   type: 'h1' | 'h2' | 'h3';
 };
 
 export const Title: React.FC<TitleProps> = ({
-  marginBottom,
+  marginBottom = 0,
+  marginLeft = 0,
   type,
   children,
 }) => {
   return (
-    <Container style={{ marginBottom: RFValue(marginBottom || 0) }} type={type}>
+    <Container
+      style={{
+        marginBottom: RFValue(marginBottom),
+        marginLeft: RFValue(marginLeft),
+      }}
+      type={type}
+    >
       {children}
     </Container>
   );

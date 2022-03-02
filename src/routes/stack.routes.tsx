@@ -1,6 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Book } from '@screens/Book';
+import { BookshelfSearch } from '@screens/BookshelfSearch';
 import { TabRoutes } from './tab.routes';
 import { RootStackParamList } from './types';
 
@@ -11,6 +12,7 @@ export const StackRoutes: React.FC = () => {
     <Navigator screenOptions={{ headerShown: false }}>
       <Screen name="tab" component={TabRoutes} />
       <Screen name="book" component={Book} />
+      <Screen name="bookshelfSearch" component={BookshelfSearch} />
     </Navigator>
   );
 };

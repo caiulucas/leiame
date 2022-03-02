@@ -10,6 +10,7 @@ import { BookInfo, Button, Icon } from '../styles';
 
 export type Book = {
   id: string;
+  etag: string;
   selfLink: string;
   volumeInfo: {
     title: string;

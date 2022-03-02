@@ -1,11 +1,23 @@
 import { IconButton } from '@components/Buttons/IconButton';
 import { StatusBar } from 'react-native';
+
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
+  flex: 1;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
 `;
+
+export const LoaderArea = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Loader = styled.ActivityIndicator.attrs(({ theme }) => {
+  return { color: theme.COLORS.PRIMARY_500, size: RFValue(48) };
+})``;
 
 export const ScrollContent = styled.ScrollView``;
 

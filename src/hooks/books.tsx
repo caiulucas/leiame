@@ -106,6 +106,7 @@ export const BooksProvider: React.FC = ({ children }) => {
 
         // Check if book exists on reading-now bookshelf and returns
         if (firestoreBook) {
+          formattedBook.status = firestoreBook.status;
           formattedBook.actualPage = firestoreBook.actualPage;
           formattedBook.readingPercentage = String(
             (firestoreBook.actualPage / formattedBook.volumeInfo.pageCount) *
@@ -115,7 +116,7 @@ export const BooksProvider: React.FC = ({ children }) => {
         }
 
         // Get bookshelf from book and save in firebase if book is on reading-now
-        bookshelvesList.every(async bookshelf => {
+        const bookshelvesPromises = bookshelvesList.map(async bookshelf => {
           const { data: bookshelfResponse } = await bookApi.get(
             `/mylibrary/bookshelves/${bookshelf.id}/volumes?q=isbn:${formattedBook.isbn.identifier}`,
             {
@@ -142,6 +143,8 @@ export const BooksProvider: React.FC = ({ children }) => {
           }
           return true;
         });
+
+        await Promise.all(bookshelvesPromises);
 
         return formattedBook;
       } catch (error) {

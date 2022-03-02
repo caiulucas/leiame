@@ -47,7 +47,10 @@ export const Bookshelf: React.FC<BookshelfProps> = ({ title, path }) => {
         <>
           <TitleArea>
             <Title type="h2">{title}</Title>
-            <TextButton title="Ver mais" />
+            <TextButton
+              title="Ver mais"
+              onPress={() => navigate('bookshelfSearch', { path })}
+            />
           </TitleArea>
 
           {books.length > 0 ? (

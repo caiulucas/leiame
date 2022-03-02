@@ -6,7 +6,9 @@ type SkeletonBookImage = {
   type?: 'primary' | 'secondary';
 };
 
-export const SkeletonBookImage: React.FC<SkeletonBookImage> = ({ type }) => {
+export const SkeletonBookImage: React.FC<SkeletonBookImage> = ({
+  type = 'primary',
+}) => {
   return (
     <SkeletonPlaceholder.Item
       width={type === 'primary' ? RFValue(96) : RFValue(144)}

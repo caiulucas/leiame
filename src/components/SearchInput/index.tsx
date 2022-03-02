@@ -4,6 +4,7 @@ import { Container, Icon, Input, SearchButton } from './styles';
 
 type SearchInputProps = {
   value: string;
+  marginRight?: number;
   onChangeText: (text: string) => void;
   onPress: () => void;
 };
@@ -11,10 +12,11 @@ type SearchInputProps = {
 export const SearchInput: React.FC<SearchInputProps> = ({
   onPress,
   value,
+  marginRight = 8,
   onChangeText,
 }) => {
   return (
-    <Container>
+    <Container marginRight={marginRight}>
       <Input
         placeholder="Procure um livro"
         value={value}
